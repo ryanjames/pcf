@@ -174,32 +174,33 @@ const Background = () => {
 					const c = geometry.vertices[face.c];
 					const vList = [a, b, c];
 				
+
 					if(!a.origXSet) {
 		        a.origX = a.x;
 		        a.origY = a.y;
-		        a.origZ = a.z;
-		        a.origXSet = true;
-		      }
-				
+						a.distance = Math.random() * (0.3 - 0.1) + 0.1;
+						a.travel = Math.random() * (0.3 - 0) + 0;
+					}
+
 		      const vect = a;
 		      const dx = (a.origX - mouse.x), dy = (vect.origY - mouse.y);
 					const dist = Math.sqrt( dx*dx + dy*dy);
 				
-		      if(dist < 0.2) {
+
+		      if(dist < a.distance) {
 		        for ( let j = 0, jl = vList.length; j < jl; j ++ ) {
-		          const v = vList[j];
+							const v = vList[j];
 		          if(!v.origXSet) {
-		          	   v.origX = v.x;
+		          	  v.origX = v.x;
 		              v.origY = v.y;
-		              v.origZ = v.z;
 		              v.origXSet = true;
 		          }
 		          const len = Math.sqrt(dx*dx + dy*dy);
 		          if(len===0) return;
 		          const ndx = dx / len,
 		              ndy = dy / len;
-		          v.x = v.origX + ndx * 0.08;
-		          v.y = v.origY + ndy * 0.08; 
+		          v.x = v.origX + ndx * a.travel;
+		          v.y = v.origY + ndy * a.travel; 
 		        };
 		      } else {
 		        vList.forEach(function(v) {
