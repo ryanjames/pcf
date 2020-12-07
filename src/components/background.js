@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import * as THREE from 'three';
+import { isMobile } from 'mobile-device-detect';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import fragment from '../shaders/fragment.glsl';
 import vertex from '../shaders/vertex.glsl';
@@ -28,8 +29,11 @@ const Background = () => {
     const radius = 500;
     const frustumSize = 100;
 
-    const width = () => document.body.clientWidth > document.body.clientHeight ? document.body.clientWidth : document.body.clientHeight;
-    const height = () => document.body.clientHeight > document.body.clientWidth ? document.body.clientHeight : document.body.clientWidth;
+    const canvasWidth = () => document.body.clientWidth > document.body.clientHeight ? document.body.clientWidth : document.body.clientHeight;
+		const canvasHeight = () => document.body.clientHeight > document.body.clientWidth ? document.body.clientHeight : document.body.clientWidth;
+
+		const initWidth = canvasWidth();
+		const initHeight = canvasHeight();
 
 		init();
 		animate();
@@ -48,7 +52,7 @@ const Background = () => {
 			const uniforms = {
 				resolution: {
 					type: 'v2',
-					value: new THREE.Vector2(width(), height()),
+					value: new THREE.Vector2(initWidth, initHeight),
 				},
 				imageResolution: {
 					type: 'v2',
@@ -84,7 +88,7 @@ const Background = () => {
 
 		function init() {
 		
-			const aspect = width() / height();
+			const aspect = initWidth / initHeight;
 		
 			camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 1000 );
 		
@@ -102,12 +106,12 @@ const Background = () => {
 				alpha: true,
 			});
 		
-			renderer.setSize(width(), height());
+			renderer.setSize(initWidth, initHeight);
 		
 			stats = new Stats();
 			document.body.appendChild( stats.dom );
 		
-			document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+			document.addEventListener( isMobile ? 'touchmove' : 'mousemove', onMouseEvent, false );
 		
 			window.addEventListener( 'resize', resizeWindow, false );
 		
@@ -115,7 +119,10 @@ const Background = () => {
 
 		function resizeWindow() {
 		
-			const aspect = width() / height();
+			const width = canvasWidth();
+			const height = canvasHeight();
+
+			const aspect = width / height;
 		
 			camera.left = - frustumSize * aspect / 2;
 			camera.right = frustumSize * aspect / 2;
@@ -124,24 +131,37 @@ const Background = () => {
 		
 			camera.updateProjectionMatrix();
 		
-			renderer.setSize(width(), height());
+			renderer.setSize(width, height);
 		
-		 	canvas.width = width();
-		 	canvas.height = height();
+		 	canvas.width = width;
+		 	canvas.height = height;
 		 	canvas.style.transform = document.body.clientWidth > document.body.clientHeight ? "translateY(-50%)" : "translateX(-50%)";
 		 	canvas.style.top = document.body.clientWidth > document.body.clientHeight ? "50%" : "0";
 		 	canvas.style.left = document.body.clientWidth > document.body.clientHeight ? "0" : "50%";
-		 	mesh.material.uniforms.resolution.value.set(width(), height());
+		 	mesh.material.uniforms.resolution.value.set(width, height);
 		
 		}
 
-		function onDocumentMouseMove( event ) {
+		function onMouseEvent( event ) {
+
+			const width = canvasWidth();
+			const height = canvasHeight();
 		
 			event.preventDefault();
+
+			const mouseX = isMobile ? event.pageX : event.clientX;
+			const mouseY = isMobile ? event.pageY : event.clientY;
 		
-			mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-			mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-		
+			const canvas_x = ( mouseX / window.innerWidth ) * 2 - 1;
+			const canvas_y = - ( mouseY / window.innerHeight ) * 2 + 1;
+			if(document.body.clientWidth > document.body.clientHeight) {
+				mouse.x = canvas_x;
+				mouse.y = window.innerHeight * canvas_y / height;
+			} else {
+				mouse.x = window.innerWidth * canvas_x / width;
+				mouse.y = canvas_y;
+			}
+
 			const geometry = mesh.geometry;
 		
 			for ( let i = 0, il = geometry.faces.length; i < il; i ++ ) {
