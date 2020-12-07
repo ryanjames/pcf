@@ -1,22 +1,45 @@
 import React, { useEffect } from "react";
 import * as THREE from 'three';
+import { css } from '@emotion/react';
 import { isMobile } from 'mobile-device-detect';
 import Stats from 'three/examples/jsm/libs/stats.module.js';
 import fragment from '../shaders/fragment.glsl';
 import vertex from '../shaders/vertex.glsl';
 import TessellateModifier from '../modifiers/TessellateModifier';
 import ExplodeModifier from '../modifiers/ExplodeModifier';
-import food from '../images/food.jpg';
+import food from '../images/soup.jpg';
+import background from "../images/background.jpg"
 
 const Background = () => {
+
+	const backgroundStyles = css`
+  	background-image: url(${background});
+		background-size: cover;
+		background-position: center;
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		z-index: 1;
+	`
+
+	const canvasStyles = css`
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 2;
+	`
+
 	const canvas = (
-    <canvas 
-      style={{
-        backgroundImage: '../images/food.jpg',
-      }}
-      id="canvas-bg">
-    </canvas>
+		<>
+			<div css={ backgroundStyles } />
+  	  <canvas css={ canvasStyles } id="canvas-bg" />
+		</>
 	)
+	
 
   useEffect(() => {
 
@@ -27,7 +50,9 @@ const Background = () => {
 
     const mouse = new THREE.Vector2();
     const radius = 500;
-    const frustumSize = 100;
+		const frustumSize = 100;
+		
+		let imageNativeWidth, imageNativeHeight;
 
     const canvasWidth = () => document.body.clientWidth > document.body.clientHeight ? document.body.clientWidth : document.body.clientHeight;
 		const canvasHeight = () => document.body.clientHeight > document.body.clientWidth ? document.body.clientHeight : document.body.clientWidth;
@@ -43,6 +68,8 @@ const Background = () => {
 			loader.load(image, (_texture) => {
 				_texture.magFilter = THREE.NearestFilter;
 				_texture.minFilter = THREE.NearestFilter;
+				imageNativeWidth = _texture.image.width;
+				imageNativeHeight = _texture.image.height;
 				texture = _texture;
 				callback();
 			});
@@ -56,7 +83,7 @@ const Background = () => {
 				},
 				imageResolution: {
 					type: 'v2',
-					value: new THREE.Vector2(2048, 1356),
+					value: new THREE.Vector2(imageNativeWidth, imageNativeHeight),
 				},
 				texture: {
 					type: 't',
@@ -97,24 +124,26 @@ const Background = () => {
 			loadTexture(food, () => {
 				mesh = createMesh();
 				scene.add(mesh);
-				resizeWindow();
-			});
+
+				renderer.setSize(initWidth, initHeight);
 		
+				document.addEventListener( isMobile ? 'touchmove' : 'mousemove', onMouseEvent, false );
+		
+				window.addEventListener( 'resize', resizeWindow, false );
+		
+				resizeWindow();
+
+			});
+
+			stats = new Stats();
+			document.body.appendChild( stats.dom );
+
 			renderer = new THREE.WebGLRenderer({
 				antialias: true,
 				canvas: canvas,
 				alpha: true,
 			});
-		
-			renderer.setSize(initWidth, initHeight);
-		
-			stats = new Stats();
-			document.body.appendChild( stats.dom );
-		
-			document.addEventListener( isMobile ? 'touchmove' : 'mousemove', onMouseEvent, false );
-		
-			window.addEventListener( 'resize', resizeWindow, false );
-		
+
 		}
 
 		function resizeWindow() {
@@ -161,9 +190,9 @@ const Background = () => {
 				mouse.x = window.innerWidth * canvas_x / width;
 				mouse.y = canvas_y;
 			}
-
-			const geometry = mesh.geometry;
 		
+			const geometry = mesh.geometry;
+
 			for ( let i = 0, il = geometry.faces.length; i < il; i ++ ) {
 				const face = geometry.faces[ i ];
 			
@@ -174,7 +203,6 @@ const Background = () => {
 					const c = geometry.vertices[face.c];
 					const vList = [a, b, c];
 				
-
 					if(!a.origXSet) {
 		        a.origX = a.x;
 		        a.origY = a.y;
@@ -185,7 +213,6 @@ const Background = () => {
 		      const vect = a;
 		      const dx = (a.origX - mouse.x), dy = (vect.origY - mouse.y);
 					const dist = Math.sqrt( dx*dx + dy*dy);
-				
 
 		      if(dist < a.distance) {
 		        for ( let j = 0, jl = vList.length; j < jl; j ++ ) {
