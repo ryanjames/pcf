@@ -3,7 +3,7 @@ html {
   -webkit-text-size-adjust: 100%;
   font: 112.5%/1.45em georgia, serif, sans-serif;
   box-sizing: border-box;
-  overflow-y: scroll;
+  height: 100%;
 }
 body {
   margin: 0;
@@ -18,6 +18,14 @@ body {
   -ms-font-feature-settings: "kern", "liga", "clig", "calt";
   -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
   font-feature-settings: "kern", "liga", "clig", "calt";
+  min-height: 100%;
+  overflow: hidden;
+  margin: 0;
+  background-color: #1f1f1f;
+}
+canvas {
+	position: absolute;
+	top: 0; right: 0; bottom: 0; left: 0;
 }
 article,
 aside,
