@@ -4,7 +4,7 @@ import { css } from '@emotion/react'
 import Welcome from "../components/welcome"
 import Logo from "../components/logo"
 
-const Content = () => {
+const Body = () => {
 
   const [welcomeState, setWelcomeState] = useState(false);
 
@@ -124,4 +124,4 @@ const Content = () => {
   )
 }
 
-export default Content
+export default Body
