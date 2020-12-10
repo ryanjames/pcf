@@ -15,6 +15,7 @@ const Body = () => {
     left: 32px;
     bottom: 32px;
     right: 32px;
+
     @media (min-width: 460px) {
       top: 60px;
       bottom: 60px;
