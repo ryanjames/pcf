@@ -98,7 +98,7 @@ const Background = () => {
 		
 			// Tassellate geometry
 		
-			const tessallateModifier = new TessellateModifier(0.04);
+			const tessallateModifier = new TessellateModifier(0.09);
 			for (let i = 0; i < 360; i++) {
 					tessallateModifier.modify(geometry);
 			};
@@ -217,8 +217,8 @@ const Background = () => {
 					if(!a.origXSet) {
 		        a.origX = a.x;
 		        a.origY = a.y;
-						a.distance = Math.random() * (0.15 - 0.05) + 0.05;
-						a.travel = Math.random() * (0.2 - 0) + 0;
+						a.distance = Math.random() * (0.3 - 0) + 0;
+						a.travel = Math.random() * (0.5 - 0) + 0;
 					}
 
 		      const vect = a;

@@ -46,6 +46,12 @@ const Body = () => {
     line-height: 1em;
     margin-bottom: 0;
     font-size: 2rem;
+    text-decoration: none;
+    color: #120030;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      text-shadow: -10px 10px #EA33EC;
+    }
     @media (min-width: 640px) {
       font-size: 3rem;
       max-width: 480px;
@@ -119,7 +125,7 @@ const Body = () => {
             </div>
           </div>
         </nav>
-        <h2 css={ headingStyles } >Chemo Kitchen is open for business</h2>
+        <a href="https://medium.com/paper-crane-factory" css={ headingStyles } >Chemo Kitchen is open for business</a>
       </div>
     </>
   )
