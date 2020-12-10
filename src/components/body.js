@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { css } from '@emotion/react'
 
-import Welcome from "../components/welcome"
-import Logo from "../components/logo"
+import Welcome from "./Welcome"
+import Logo from "./Logo"
 
 const Body = () => {
 
