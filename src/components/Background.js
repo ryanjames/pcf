@@ -9,7 +9,7 @@ import vertex from '../shaders/vertex.glsl';
 import TessellateModifier from '../modifiers/TessellateModifier';
 import ExplodeModifier from '../modifiers/ExplodeModifier';
 
-import foreground from '../images/soup.jpg';
+import foreground from '../images/soup-2.jpg';
 import background from "../images/background.jpg";
 
 const Background = () => {
@@ -276,7 +276,6 @@ const Background = () => {
 			camera.updateMatrixWorld();
 		
 			renderer.render( scene, camera );
-		
 
 		}
 
