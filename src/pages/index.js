@@ -1,9 +1,9 @@
 import React from 'react'
 import { css } from '@emotion/react'
 
-import SEO from "../components/SEO"
-import Background from "../components/Background"
-import Content from "../components/Content"
+import SEO from "../components/seo"
+import Background from "../components/background"
+import Content from "../components/content"
 import foreground from '../images/soup.jpg';
 import background from "../images/background.jpg";
 
