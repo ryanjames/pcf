@@ -60,7 +60,7 @@ const Welcome = ({ open, handleWelcomeClick }) => {
     <div css={ welcomeStyles } className={open ? 'open' : ''}>
       <p>
         Welcome to The Paper Crane Factory. We are a venture firm, but our capital is time. 
-        We're also a full-service branding and advertising agency for our partners on projects profiled below and on our "<a href="https://medium.com/paper-crane-factory" target="_blank" rel="noreferrer">work</a>" pages. 
+        We're also a full-service branding and advertising agency for our partners on projects profiled below and on our "<a href="https://medium.com/paper-crane-factory">work</a>" pages. 
         If you are a startup or behave like a company that is, we want to <a href="mailto:info@papercranefactory.com">talk</a> to you.
       </p>
       <Close css={ closeStyles } onClick={handleWelcomeClick} />
