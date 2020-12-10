@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import PropTypes from 'prop-types';
 import * as THREE from 'three';
 import { css } from '@emotion/react';
 import { isMobile } from 'mobile-device-detect';
@@ -7,13 +8,11 @@ import fragment from '../shaders/fragment.glsl';
 import vertex from '../shaders/vertex.glsl';
 import TessellateModifier from '../modifiers/TessellateModifier';
 import ExplodeModifier from '../modifiers/ExplodeModifier';
-import food from '../images/soup.jpg';
-import background from "../images/background.jpg"
 
-const Background = () => {
+const Background = ({ foreground, background }) => {
 
 	const backgroundStyles = css`
-  	background-image: url(${background});
+		background-image: url(${background});
 		background-size: cover;
 		background-position: center;
 		position: absolute;
@@ -23,7 +22,6 @@ const Background = () => {
 		right: 0;
 		z-index: 1;
 	`
-
 	const canvasStyles = css`
 		position: absolute;
 		top: 0;
@@ -34,12 +32,11 @@ const Background = () => {
 	`
 
 	const canvas = (
-		<>
-			<div css={ backgroundStyles } />
-  	  <canvas css={ canvasStyles } id="canvas-bg" />
-		</>
+	<>
+	 <div css={ backgroundStyles } />
+		<canvas css={ canvasStyles } id="canvas-bg" />
+	</>
 	)
-	
 
   useEffect(() => {
 
@@ -63,15 +60,19 @@ const Background = () => {
 		init();
 		animate();
 
-		function loadTexture(image, callback) {
+		function loadImages(foreground, background, callback) {
 			const loader = new THREE.TextureLoader();
-			loader.load(image, (_texture) => {
+			loader.load(foreground, (_texture) => {
 				_texture.magFilter = THREE.NearestFilter;
 				_texture.minFilter = THREE.NearestFilter;
 				imageNativeWidth = _texture.image.width;
 				imageNativeHeight = _texture.image.height;
 				texture = _texture;
-				callback();
+				const _background = new Image();
+				_background.src = background;
+				_background.onload = () => {
+					callback();
+				};
 			});
 		}
 
@@ -114,14 +115,17 @@ const Background = () => {
 		}
 
 		function init() {
-		
+
 			const aspect = initWidth / initHeight;
 		
 			camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 1000 );
 		
 			scene = new THREE.Scene();
 		
-			loadTexture(food, () => {
+
+			loadImages(foreground, background, () => {
+
+
 				mesh = createMesh();
 				scene.add(mesh);
 
@@ -133,10 +137,14 @@ const Background = () => {
 		
 				resizeWindow();
 
+				setTimeout(function() {
+					document.body.classList.add("loaded");
+				}, 400);
+
 			});
 
 			stats = new Stats();
-			document.body.appendChild( stats.dom );
+			// document.body.appendChild( stats.dom );
 
 			renderer = new THREE.WebGLRenderer({
 				antialias: true,
@@ -266,20 +274,23 @@ const Background = () => {
 		
 			renderer.render( scene, camera );
 		
+
 		}
 
   });
 	return canvas;
 }
 
-/*
 Background.propTypes = {
-  prop: PropTypes.string,
+  foreground: PropTypes.string,
+	background: PropTypes.string,
+	loaded: PropTypes.func
 }
 
 Background.defaultProps = {
-  prop: ``,
+  foreground: null,
+  background: null,
+	loaded: null
 }
-*/
 
 export default Background
