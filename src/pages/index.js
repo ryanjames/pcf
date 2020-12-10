@@ -4,8 +4,6 @@ import { css } from '@emotion/react'
 import SEO from "../components/Seo"
 import Background from "../components/Background"
 import Body from "../components/Body"
-import foreground from '../images/soup.jpg';
-import background from "../images/background.jpg";
 
 const IndexPage = () => {
 
@@ -21,7 +19,7 @@ const IndexPage = () => {
     <>
       <SEO title="Paper Crane Factory" />
       <div css={ loadedStyles } >
-        <Background  foreground={foreground} background={background} />
+        <Background />
         <Body/>
       </div>
     </>
