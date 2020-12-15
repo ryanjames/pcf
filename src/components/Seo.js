@@ -46,6 +46,10 @@ function SEO({ description, lang, meta, title }) {
           content: `website`,
         },
         {
+          name: `og:image`,
+          content: `/images/pcf-og-image.jpg`,
+        },
+        {
           name: `twitter:card`,
           content: `summary`,
         },
