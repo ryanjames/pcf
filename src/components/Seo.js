@@ -47,7 +47,7 @@ function SEO({ description, lang, meta, title }) {
         },
         {
           name: `og:image`,
-          content: `/images/pcf-og-image.jpg`,
+          content: `https://papercranefactory.com/images/pcf-og-image.jpg`,
         },
         {
           name: `twitter:card`,
