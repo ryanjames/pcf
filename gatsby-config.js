@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Paper Crane Factory`,
-    description: `Let's do this.`,
+    description: `Welcome to The Paper Crane Factory. We are a venture capital firm, but our capital is time. We spend it as a full-service creative branding and advertising agency.`,
     author: `@gatsbyjs`,
   },
   plugins: [
