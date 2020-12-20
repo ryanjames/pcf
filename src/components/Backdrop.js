@@ -141,7 +141,7 @@ const Backdrop = ({ data }) => {
 
 				setTimeout(function() {
 					document.body.classList.add("loaded");
-				}, 400);
+				}, 700);
 
 			});
 
