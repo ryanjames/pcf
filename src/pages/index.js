@@ -2,20 +2,20 @@ import React from 'react'
 import { css } from '@emotion/react'
 
 import SEO from "../components/Seo"
-import Background from "../components/Background"
-import Body from "../components/Body"
+import Backdrop from "../components/Backdrop"
+import Content from "../components/Content"
 
 const IndexPage = ({data}) => {
 
-  const content = data.allContentfulLandingPage.edges[0].node;
-  const bodyContent = {
-    headline: content.headline,
-    headlineLink: content.headlineLink,
-    welcome: content.welcome.welcome
+  const _data = data.allContentfulLandingPage.edges[0].node;
+  const contentData = {
+    headline: _data.headline,
+    headlineLink: _data.headlineLink,
+    welcome: _data.welcome
   }
-  const backgroundContent = {
-    background: content.backgroundImage.file.url,
-    foreground: content.foregroundImage.file.url
+  const backdropData = {
+    background: _data.backgroundImage.file.url,
+    foreground: _data.foregroundImage.file.url
   }
 
   const loadedStyles = css`
@@ -30,8 +30,8 @@ const IndexPage = ({data}) => {
     <>
       <SEO title="Paper Crane Factory" />
       <div css={ loadedStyles } >
-        <Background content={backgroundContent} />
-        <Body content={bodyContent} />
+        <Backdrop data={backdropData} />
+        <Content data={contentData} />
       </div>
     </>
   )

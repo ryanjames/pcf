@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import PropTypes from 'prop-types';
 import Close from '../graphics/close.svg'
 
-const Welcome = ({ content, open, handleWelcomeClick }) => {
+const Welcome = ({ data, open, handleWelcomeClick }) => {
 
   const welcomeStyles = css`
     position: absolute;
@@ -58,7 +58,7 @@ const Welcome = ({ content, open, handleWelcomeClick }) => {
 
   return (
     <div css={ welcomeStyles } className={open ? 'open' : ''}>
-      <p dangerouslySetInnerHTML={{ __html: content }} />
+      <p dangerouslySetInnerHTML={{ __html: data.welcome }} />
       <Close css={ closeStyles } onClick={handleWelcomeClick} />
     </div>
   )

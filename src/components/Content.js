@@ -4,7 +4,7 @@ import { css } from '@emotion/react'
 import Welcome from "./Welcome"
 import Logo from "./Logo"
 
-const Body = ({ content }) => {
+const Content = ({ data }) => {
 
   const [welcomeState, setWelcomeState] = useState(false);
 
@@ -111,11 +111,9 @@ const Body = ({ content }) => {
     setWelcomeState(!welcomeState);
   }
 
-  console.log(content.welcome)
-
   return (
     <>
-      <Welcome content={content.welcome} open={welcomeState} handleWelcomeClick={handleWelcomeClick} />
+      <Welcome data={data.welcome} open={welcomeState} handleWelcomeClick={handleWelcomeClick} />
       <div css={ containerStyles } >
         <nav css={css`display: flex;`}>
           <div role="button" onClick={handleWelcomeClick} onKeyDown={handleWelcomeClick} tabIndex="0" css={ menuItemStyles }>
@@ -127,10 +125,10 @@ const Body = ({ content }) => {
             </div>
           </div>
         </nav>
-        <a href={content.headlineLink} css={ headingStyles } >{content.headline}</a>
+        <a href={data.headlineLink} css={ headingStyles } >{data.headline}</a>
       </div>
     </>
   )
 }
 
-export default Body
+export default Content

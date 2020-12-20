@@ -9,10 +9,10 @@ import vertex from '../shaders/vertex.glsl';
 import TessellateModifier from '../modifiers/TessellateModifier';
 import ExplodeModifier from '../modifiers/ExplodeModifier';
 
-const Background = ({content}) => {
+const Backdrop = ({ data }) => {
 
-	const background = content.background;
-	const foreground = content.foreground;
+	const background = data.background;
+	const foreground = data.foreground;
 	const backgroundStyles = css`
 		background-image: url(${background});
 		background-size: cover;
@@ -282,16 +282,16 @@ const Background = ({content}) => {
 	return canvas;
 }
 
-Background.propTypes = {
+Backdrop.propTypes = {
   foreground: PropTypes.string,
 	background: PropTypes.string,
 	loaded: PropTypes.func
 }
 
-Background.defaultProps = {
+Backdrop.defaultProps = {
   foreground: null,
   background: null,
 	loaded: null
 }
 
-export default Background
+export default Backdrop
