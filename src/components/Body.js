@@ -4,7 +4,7 @@ import { css } from '@emotion/react'
 import Welcome from "./Welcome"
 import Logo from "./Logo"
 
-const Body = () => {
+const Body = ({ content }) => {
 
   const [welcomeState, setWelcomeState] = useState(false);
 
@@ -111,9 +111,11 @@ const Body = () => {
     setWelcomeState(!welcomeState);
   }
 
+  console.log(content.welcome)
+
   return (
     <>
-      <Welcome open={welcomeState} handleWelcomeClick={handleWelcomeClick} />
+      <Welcome content={content.welcome} open={welcomeState} handleWelcomeClick={handleWelcomeClick} />
       <div css={ containerStyles } >
         <nav css={css`display: flex;`}>
           <div role="button" onClick={handleWelcomeClick} onKeyDown={handleWelcomeClick} tabIndex="0" css={ menuItemStyles }>
@@ -125,7 +127,7 @@ const Body = () => {
             </div>
           </div>
         </nav>
-        <a href="https://medium.com/paper-crane-factory" css={ headingStyles } >Chemo Kitchen is open for business</a>
+        <a href={content.headlineLink} css={ headingStyles } >{content.headline}</a>
       </div>
     </>
   )

@@ -15,6 +15,13 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: `0j07hvd1z3st`,
+        accessToken: `D6dnLZ3c9sSiGuZXHoQCLXRwPQ4vH497NpBEqjGgTFA`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-emotion`,
       options: {
         // Accepts the following options, all of which are defined by `@emotion/babel-plugin` plugin.

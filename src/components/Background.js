@@ -9,11 +9,10 @@ import vertex from '../shaders/vertex.glsl';
 import TessellateModifier from '../modifiers/TessellateModifier';
 import ExplodeModifier from '../modifiers/ExplodeModifier';
 
-import foreground from '../images/soup.jpg';
-import background from "../images/background.jpg";
+const Background = ({content}) => {
 
-const Background = () => {
-
+	const background = content.background;
+	const foreground = content.foreground;
 	const backgroundStyles = css`
 		background-image: url(${background});
 		background-size: cover;

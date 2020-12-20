@@ -3,7 +3,7 @@ import { css } from '@emotion/react';
 import PropTypes from 'prop-types';
 import Close from '../graphics/close.svg'
 
-const Welcome = ({ open, handleWelcomeClick }) => {
+const Welcome = ({ content, open, handleWelcomeClick }) => {
 
   const welcomeStyles = css`
     position: absolute;
@@ -58,11 +58,7 @@ const Welcome = ({ open, handleWelcomeClick }) => {
 
   return (
     <div css={ welcomeStyles } className={open ? 'open' : ''}>
-      <p>
-        Welcome to The Paper Crane Factory. We are a venture capital firm, but our capital is time. 
-        We spend it as a full-service creative branding and advertising agency for our partners on projects profiled on our "<a href="https://medium.com/paper-crane-factory">work</a>" pages. 
-        If you are a startup, or behave like a company that is, we want to <a href="mailto:contact@papercranefactory.com">talk</a> to you.
-      </p>
+      <p dangerouslySetInnerHTML={{ __html: content }} />
       <Close css={ closeStyles } onClick={handleWelcomeClick} />
     </div>
   )
