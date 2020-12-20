@@ -13,7 +13,7 @@ const Welcome = ({ data, open, handleWelcomeClick }) => {
     transform: translateY(-100%);
     width: 100%;
     background-color: #120030;
-    z-index: 4;
+    z-index: 5;
     color: #ffffff;
     box-sizing: border-box;
     padding: 80px 32px 32px;

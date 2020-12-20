@@ -5,6 +5,7 @@ import SEO from "../components/Seo"
 import Backdrop from "../components/Backdrop"
 import Content from "../components/Content"
 import Loading from "../components/Loading"
+import Controls from "../components/Controls"
 
 const IndexPage = ({data}) => {
 
@@ -23,6 +24,7 @@ const IndexPage = ({data}) => {
     <>
       <SEO title="Paper Crane Factory" />
       <Loading />
+      <Controls />
       <Backdrop data={backdropData} />
       <Content data={contentData} />
     </>
