@@ -1,6 +1,7 @@
-import React, { useEffect } from "react"
+import React, { useState, useEffect } from "react";
 import LoadingBunny from '../graphics/loading-bunny.svg'
 import { css } from '@emotion/react'
+import observer from "../js/observer"
 
 const loadingStyles = css`
   position: absolute;
@@ -12,7 +13,7 @@ const loadingStyles = css`
   right: 0;
   background-color: #fff;
   opacity: 1;
-  body.loaded & {
+  &.loaded {
     opacity: 0;
     z-index: 0;
   }
@@ -47,31 +48,27 @@ const animateBunny = () => {
 
 const Loading = () => {
 
+  const [sketchLoaded, setSketchLoaded] = useState(false);
+  const [bgLoaded, setBgLoaded] = useState(false);
+
+  observer.subscribe("sketchLoaded:true", () => {
+    setSketchLoaded(true)
+  })
+  observer.subscribe("bgLoaded:true", () => {
+    setBgLoaded(true)
+  })
+
   useEffect(() => {
-    const observer = new MutationObserver((mutations) => { 
-      mutations.forEach((mutation) => {
-        const el = mutation.target;
-        if ((!mutation.oldValue || !mutation.oldValue.match(/\bloaded\b/)) 
-          && mutation.target.classList 
-          && mutation.target.classList.contains('loaded')){
-          clearTimeout(cycle);
-        } else {
-          animateBunny();
-        }
-      });
-    });
-    observer.observe(document.body, { 
-      attributes: true, 
-      attributeOldValue: true, 
-      attributeFilter: ['class'] 
-    });
-
-    animateBunny();
-
+    if(bgLoaded && sketchLoaded) {
+      // console.log(allLoaded)
+      clearTimeout(cycle)
+    } else {
+      animateBunny()
+    }
   });
 
   return (
-    <div css={ loadingStyles } >
+    <div css={ loadingStyles } className={(bgLoaded && sketchLoaded ? 'loaded' : '')} >
       <LoadingBunny />
     </div>
   )
