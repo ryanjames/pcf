@@ -5,13 +5,8 @@ import Backdrop from "../components/Backdrop"
 import Content from "../components/Content"
 import Loading from "../components/Loading"
 import Controls from "../components/Controls"
-import observer from "../js/observer"
 
 const IndexPage = ({data}) => {
-
-  const [sketchLoaded, setSketchLoaded] = useState(false);
-  const [bgLoaded, setBgLoaded] = useState(false);
-
   const _data = data.allContentfulLandingPage.edges[0].node;
   const contentData = {
     headline: _data.headline,
@@ -23,19 +18,6 @@ const IndexPage = ({data}) => {
     foreground: _data.foregroundImage.file.url
   }
 
-  observer.subscribe("sketchLoaded:true", () => {
-    setSketchLoaded(true)
-  })
-  observer.subscribe("bgLoaded:true", () => {
-    setBgLoaded(true)
-  })
-
-  useEffect(() => {
-    if(bgLoaded && sketchLoaded) {
-      // console.log(allLoaded)
-    }
-  })
-
   return (
     <>
       <SEO title="Paper Crane Factory" />
@@ -45,7 +27,6 @@ const IndexPage = ({data}) => {
       <Content data={contentData} />
     </>
   )
-
 }
 
 export const query = graphql`
