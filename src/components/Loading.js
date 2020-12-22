@@ -36,36 +36,41 @@ const loadingStyles = css`
   }
 `;
 
-let cycle;
-const animateBunny = () => {
-  const paths = document.querySelectorAll('svg#loading-bunny g path');
-  paths.forEach((path) => {
-    const randomColor = '#'+Math.floor(Math.random()*16777215).toString(16)
-    path.style.fill = randomColor;
-  });
-  cycle = setTimeout(() => animateBunny(), 200)
-}
 
 const Loading = () => {
 
   const [sketchLoaded, setSketchLoaded] = useState(false);
   const [bgLoaded, setBgLoaded] = useState(false);
+  const [bunnyInt, setBunnyInt] = useState();
+  let paths
 
   observer.subscribe("sketchLoaded:true", () => {
-    setSketchLoaded(true)
+    setTimeout(() => {
+      setSketchLoaded(true)
+    }, 1500)
   })
   observer.subscribe("bgLoaded:true", () => {
-    setBgLoaded(true)
+    setTimeout(() => {
+      setBgLoaded(true)
+    }, 1500)
   })
 
   useEffect(() => {
+
+    paths = document.querySelectorAll('svg#loading-bunny g path');
+
     if(bgLoaded && sketchLoaded) {
-      // console.log(allLoaded)
-      clearTimeout(cycle)
+      clearInterval(bunnyInt);
     } else {
-      animateBunny()
+      const bunnyCycle = setInterval(() => {
+        paths.forEach((path) => {
+          const randomColor = '#'+Math.floor(Math.random()*16777215).toString(16)
+          path.style.fill = randomColor;
+        })
+        setBunnyInt(bunnyCycle);
+      }, 300)
     }
-  });
+  }, [bunnyInt]);
 
   return (
     <div css={ loadingStyles } className={(bgLoaded && sketchLoaded ? 'loaded' : '')} >
