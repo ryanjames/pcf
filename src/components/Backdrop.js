@@ -29,6 +29,10 @@ const BackdropComponent = ({ className, data }) => {
 		} 
 
 		sketch.init(document.getElementById('sketch'), data.foreground, 0.09, 0.3, setSketchLoaded)
+
+		// sketch.faceSize = 0.19
+		// sketch.mouseRadius = 0.1
+
 	})
 
 	return (

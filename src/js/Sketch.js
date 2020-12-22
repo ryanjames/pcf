@@ -116,10 +116,13 @@ export default class Sketch {
     this.render()
   }
 
-  init(canvas, image, size, radius, setSketchLoaded) {
+  init(canvas, image, faceSize, mouseRadius, setSketchLoaded) {
     this.canvas = canvas
-    this.loadTexture(image, () => {
-			this.createMesh(this.geometry, size, () => {
+    this.image = image
+    this.mouseRadius = mouseRadius 
+    this.faceSize = faceSize 
+    this.loadTexture(this.image, () => {
+			this.createMesh(this.geometry, this.faceSize, () => {
         this.renderer = new THREE.WebGLRenderer({
           antialias: true,
           canvas: this.canvas,
@@ -129,7 +132,7 @@ export default class Sketch {
         this.animate()
 
         document.addEventListener( isMobile ? 'touchmove' : 'mousemove', event => {
-          sketchInteraction( event, this.mouse, this.canvasWidth, this.canvasHeight, this.mesh, radius)
+          sketchInteraction( event, this.mouse, this.canvasWidth, this.canvasHeight, this.mesh, this.mouseRadius)
         }, false )
         window.addEventListener( 'resize', this.resizeWindow.bind(this), false )
 
