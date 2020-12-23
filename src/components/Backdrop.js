@@ -9,7 +9,6 @@ const BackdropComponent = ({ className, data, faceSize, faceTravel, mouseRadius 
 	const [sketchLoaded, setSketchLoaded] = useState(false)
 	const [bgLoaded, setBgLoaded] = useState(false)
 
-	const sketch = new Sketch()
 	const background = new Image()
 
 	const loadBackground = (image) => {
@@ -28,6 +27,7 @@ const BackdropComponent = ({ className, data, faceSize, faceTravel, mouseRadius 
 			loadBackground(data.background)
 		} 
 
+		const sketch = new Sketch()
 		sketch.init(document.getElementById('sketch'), data.foreground, 0.09, 0.5, 0.3, setSketchLoaded)
 
 		sketch.faceSize = faceSize
