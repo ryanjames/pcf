@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 import observer from '../js/observer'
 import Sketch from "../js/Sketch";
 
-const BackdropComponent = ({ className, data }) => {
+const BackdropComponent = ({ className, data, faceSize, mouseRadius }) => {
 
 	const [sketchLoaded, setSketchLoaded] = useState(false)
 	const [bgLoaded, setBgLoaded] = useState(false)
@@ -30,8 +30,8 @@ const BackdropComponent = ({ className, data }) => {
 
 		sketch.init(document.getElementById('sketch'), data.foreground, 0.09, 0.3, setSketchLoaded)
 
-		// sketch.faceSize = 0.19
-		// sketch.mouseRadius = 0.1
+		sketch.faceSize = faceSize * 0.0018
+		sketch.mouseRadius = mouseRadius * 0.01
 
 	})
 

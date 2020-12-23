@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import SEO from "../components/Seo"
 import Backdrop from "../components/Backdrop"
@@ -18,12 +18,15 @@ const IndexPage = ({data}) => {
     foreground: _data.foregroundImage.file.url
   }
 
+	const [faceSize, setFaceSize] = useState(50)
+  const [mouseRadius, setMouseRadius] = useState(50)
+  
   return (
     <>
       <SEO title="Paper Crane Factory" />
       <Loading />
-      <Controls />
-      <Backdrop data={backdropData} />
+      <Controls faceSize={faceSize} setFaceSize={setFaceSize} mouseRadius={mouseRadius} setMouseRadius={setMouseRadius} />
+      <Backdrop data={backdropData} faceSize={faceSize} mouseRadius={mouseRadius} />
       <Content data={contentData} />
     </>
   )
