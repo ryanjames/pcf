@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { isMobile } from 'mobile-device-detect'
 
-const sketchInteraction = ( event, mouse, canvasWidth, canvasHeight, mesh, radius ) => {
+const sketchInteraction = ( event, mouse, canvasWidth, canvasHeight, mesh, mouseRadius, faceTravel ) => {
 
   const width = canvasWidth;
   const height = canvasHeight;
@@ -36,8 +36,8 @@ const sketchInteraction = ( event, mouse, canvasWidth, canvasHeight, mesh, radiu
       if(!a.origXSet) {
         a.origX = a.x;
         a.origY = a.y;
-        a.distance = Math.random() * radius + 0;
-        a.travel = Math.random() * (radius + 0.2);
+        a.distance = Math.random() * mouseRadius;
+        a.travel = Math.random() * faceTravel;
       }
 
       const vect = a;

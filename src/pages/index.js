@@ -18,15 +18,16 @@ const IndexPage = ({data}) => {
     foreground: _data.foregroundImage.file.url
   }
 
-	const [faceSize, setFaceSize] = useState(50)
-  const [mouseRadius, setMouseRadius] = useState(50)
+	const [faceSize, setFaceSize] = useState(0.127)
+  const [faceTravel, setFaceTravel] = useState(0.38)
+  const [mouseRadius, setMouseRadius] = useState(0.3)
   
   return (
     <>
       <SEO title="Paper Crane Factory" />
       <Loading />
-      <Controls faceSize={faceSize} setFaceSize={setFaceSize} mouseRadius={mouseRadius} setMouseRadius={setMouseRadius} />
-      <Backdrop data={backdropData} faceSize={faceSize} mouseRadius={mouseRadius} />
+      <Controls faceSize={faceSize} setFaceSize={setFaceSize} faceTravel={faceTravel} setFaceTravel={setFaceTravel} mouseRadius={mouseRadius} setMouseRadius={setMouseRadius} />
+      <Backdrop data={backdropData} faceSize={faceSize} faceTravel={faceTravel} mouseRadius={mouseRadius} />
       <Content data={contentData} />
     </>
   )
