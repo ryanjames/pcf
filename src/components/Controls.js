@@ -216,7 +216,7 @@ const Controls = ({faceSize, setFaceSize, faceTravel, setFaceTravel, mouseRadius
 
   const steps = 40
 
-  const minFaceSize = 0.03
+  const minFaceSize = 0.05
   const maxFaceSize = 0.275
 
   const minRadius = 0.1

@@ -18,7 +18,7 @@ const IndexPage = ({data}) => {
     foreground: _data.foregroundImage.file.url
   }
 
-	const [faceSize, setFaceSize] = useState(0.127)
+	const [faceSize, setFaceSize] = useState(0.14)
   const [faceTravel, setFaceTravel] = useState(0.38)
   const [mouseRadius, setMouseRadius] = useState(0.3)
   
