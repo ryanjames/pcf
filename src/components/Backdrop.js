@@ -9,18 +9,17 @@ const BackdropComponent = ({ className, data, faceSize, faceTravel, mouseRadius 
 	const [sketchLoaded, setSketchLoaded] = useState(false)
 	const [bgLoaded, setBgLoaded] = useState(false)
 
-	const background = new Image()
-
-	const loadBackground = (image) => {
-		background.src = image
-		background.onload = () => {
-			document.getElementById('backdrop').appendChild(background);
-		}
-	}
-
   useEffect(() => {
 		observer.publish(`sketchLoaded:${sketchLoaded? true : false}`)
 		observer.publish(`bgLoaded:${bgLoaded? true : false}`)
+
+		const background = new Image()
+		const loadBackground = (image) => {
+			background.src = image
+			background.onload = () => {
+				document.getElementById('backdrop').appendChild(background);
+			}
+		}
 
 		if(!bgLoaded) {
 			setBgLoaded(true)
