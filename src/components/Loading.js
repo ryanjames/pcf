@@ -6,7 +6,7 @@ import observer from "../js/observer"
 const loadingStyles = css`
   position: absolute;
   transition: all 0.3s ease-in-out;
-  z-index: 4;
+  z-index: 6;
   top: 0;
   bottom: 0;
   left: 0;
