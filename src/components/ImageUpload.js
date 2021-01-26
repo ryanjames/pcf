@@ -17,7 +17,10 @@ const imageUploadStyles = css`
     padding-left: 2px;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 208px;
+    width: 160px;
+    @media (min-width: 640px) {
+      width: 208px;
+    }
     cursor: pointer;
   }
   .reset {
