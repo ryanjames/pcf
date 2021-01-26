@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Slider from 'rc-slider';
 import DownChevron from '../graphics/down-chevron.svg'
 import 'rc-slider/assets/index.css';
+import ImageUpload from './ImageUpload';
 import { css } from '@emotion/react'
 
 const controlStyles = css`
@@ -59,6 +60,9 @@ const controlStyles = css`
     display: flex;
     width: 100%;
     border-bottom: 1px solid #999999;
+    &:last-of-type {
+      border-bottom: 0;
+    }
     .label {
       transition: all 0.3s ease-in-out;
       background-color: #7a7a7a;
@@ -210,7 +214,7 @@ const Control = ({label, value, min, max, set, steps}) => {
   )
 }
 
-const Controls = ({faceSize, setFaceSize, faceTravel, setFaceTravel, mouseRadius, setMouseRadius}) => {
+const Controls = ({faceSize, initImage, setFaceSize, faceTravel, setFaceTravel, mouseRadius, setMouseRadius, setImageData}) => {
 
   const [open, setOpen] = useState(false)
 
@@ -229,10 +233,6 @@ const Controls = ({faceSize, setFaceSize, faceTravel, setFaceTravel, mouseRadius
     setOpen(!open)
   }
 
-  const calculateStep = (min, max, steps) => {
-    return (max - min) / steps
-  }
-
   return (
     <div css={ controlStyles } className={`controls-container ${open ? 'open' : ''}`}>
       <div className="control-toggle" onClick={toggleControls}>
@@ -243,6 +243,13 @@ const Controls = ({faceSize, setFaceSize, faceTravel, setFaceTravel, mouseRadius
         <Control label="Size" value={faceSize} min={minFaceSize} max={maxFaceSize} set={setFaceSize} steps={steps} />
         <Control label="Radius" value={mouseRadius} min={minRadius} max={maxRadius} set={setMouseRadius} steps={steps} />
         <Control label="Travel" value={faceTravel} min={minTravel} max={maxTravel} set={setFaceTravel} steps={steps} />
+        <div className="control">
+          <div className="label"><span>Image</span></div>
+          <div className="slider">
+            Image<br />
+            <ImageUpload initImage={initImage} setImageData={setImageData} />
+          </div>
+        </div>
       </div>
     </div>
   )

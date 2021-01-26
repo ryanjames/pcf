@@ -4,8 +4,7 @@ import styled from '@emotion/styled'
 import observer from '../js/observer'
 import Sketch from "../js/Sketch";
 
-const BackdropComponent = ({ className, data, faceSize, faceTravel, mouseRadius }) => {
-
+const BackdropComponent = ({ className, imageData, data, faceSize, faceTravel, mouseRadius }) => { 
 	const [sketchLoaded, setSketchLoaded] = useState(false)
 	const [bgLoaded, setBgLoaded] = useState(false)
 
@@ -26,8 +25,10 @@ const BackdropComponent = ({ className, data, faceSize, faceTravel, mouseRadius 
 			loadBackground(data.background)
 		} 
 
+		const foregroundImage = imageData ? imageData : data.foreground
+
 		const sketch = new Sketch()
-		sketch.init(document.getElementById('sketch'), data.foreground, 0.09, 0.5, 0.3, setSketchLoaded)
+		sketch.init(document.getElementById('sketch'), foregroundImage, 0.09, 0.5, 0.3, setSketchLoaded)
 
 		sketch.faceSize = faceSize
 		sketch.mouseRadius = mouseRadius
