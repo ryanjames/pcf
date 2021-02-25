@@ -16,6 +16,14 @@ const Content = ({ data }) => {
     left: 32px;
     bottom: 32px;
     right: 32px;
+
+    .navigation {
+      display: flex;
+      flex-direction: column;
+      @media (min-width: 768px) {
+        flex-direction: row;
+      }
+    }
     
     @media (min-width: 460px) {
       top: 60px;
@@ -87,8 +95,12 @@ const Content = ({ data }) => {
       }
     }
     &.jobs-link {
-      margin-left: 24px;
       font-size: 0.6rem;
+      margin-top: 24px;
+      @media (min-width: 768px) {
+        margin-left: 24px;
+        margin-top: 0;
+      }
       .flip-back {
         font-size: 2rem;
         span {
@@ -127,7 +139,7 @@ const Content = ({ data }) => {
     <>
       <Welcome data={data.welcome} open={welcomeState} handleWelcomeClick={handleWelcomeClick} />
       <div css={ containerStyles } >
-        <nav css={css`display: flex;`}>
+        <nav className="navigation">
           <div role="button" onClick={handleWelcomeClick} onKeyDown={handleWelcomeClick} tabIndex="0" css={ menuItemStyles }>
             <div className="flip-inner">
               <div className="flip-front">
