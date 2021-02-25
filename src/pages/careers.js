@@ -9,9 +9,12 @@ const containerStyles = css`
   background-color: #120030;
   color: #ffffff;
   line-height: 170%;
-  font-size: 1.3em;
+  font-size: 1em;
   padding-top: 160px;
   overflow: scroll;
+  @media (max-width: 768px) {
+    line-height: 140%;
+  }
   .menu {
     padding-top: 130px;
     div {
@@ -21,6 +24,9 @@ const containerStyles = css`
     a {
       color: #ff00f3;
       text-decoration: none;
+    }
+    @media (max-width: 768px) {
+      padding-top: 32px;
     }
   }
   .heading {
@@ -33,18 +39,35 @@ const containerStyles = css`
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 120px;
+    @media (max-width: 768px) {
+      padding: 0 32px;
+    }
+  }
+  .body {
+    padding-top: 160px;
+    padding-bottom: 160px;
+    @media (max-width: 768px) {
+      padding-top: 40px;
+    }
   }
   h2 {
     margin: 64px 0;
     font-size: 1.3em;
+    @media (max-width: 768px) {
+      font-size: 1em;
+    }
   }
   h3 {
     font-family: "YWFTBlackSlabbath";
     font-size: 4.5rem;
     color: #d2ff00;
+    line-height: 90%;
     span {
       display: block;
       color: #ff00f3;
+    }
+    @media (max-width: 768px) {
+      font-size: 2.5rem;
     }
   }
   h4, p {
@@ -81,7 +104,7 @@ const CareersPage = () => (
         </nav>
       </div>
     </div>
-    <div className="container">
+    <div className="container body">
       <h2>We are a team of humans that push harder than actual logic. It’s like trying to imagine something cuter than an internet kitten. It’s like trying to imagine something cuter than an internet kitten.</h2>
       <h3><span>Careers:</span>Paper Crane Factory</h3>
       <div className="career">
