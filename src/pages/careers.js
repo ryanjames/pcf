@@ -1,22 +1,21 @@
 import React from "react"
 
-import { css } from '@emotion/react'
+import { Global, css } from '@emotion/react'
 import SEO from "../components/Seo"
 import { Link } from "gatsby"
 
 const containerStyles = css`
-  height: 100vh;
-  background-color: #120030;
   color: #ffffff;
   line-height: 170%;
-  font-size: 1em;
-  padding-top: 160px;
-  overflow: scroll;
+  font-size: 1.3em;
+  padding-top: 80px;
   @media (max-width: 768px) {
+    font-size: 1em;
     line-height: 140%;
+    padding-top: 0;
   }
   .menu {
-    padding-top: 130px;
+    padding-top: 32px;
     div {
       border-bottom: 1px solid #979797;
       padding-bottom: 8px;
@@ -24,9 +23,6 @@ const containerStyles = css`
     a {
       color: #ff00f3;
       text-decoration: none;
-    }
-    @media (max-width: 768px) {
-      padding-top: 32px;
     }
   }
   .heading {
@@ -44,10 +40,10 @@ const containerStyles = css`
     }
   }
   .body {
-    padding-top: 160px;
-    padding-bottom: 160px;
+    padding-bottom: 60px;
     @media (max-width: 768px) {
       padding-top: 40px;
+      padding-bottom: 0;
     }
   }
   h2 {
@@ -95,6 +91,14 @@ const containerStyles = css`
 
 const CareersPage = () => (
   <div css={ containerStyles } >
+    <Global
+      styles={css`
+        body {
+          overflow: visible;
+          background-color: #120030;
+        }
+      `}
+    />
     <div className="heading">
       <div className="container">
         <nav className="menu">
