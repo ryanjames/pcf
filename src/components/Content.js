@@ -3,6 +3,7 @@ import { css } from '@emotion/react'
 
 import Welcome from "./Welcome"
 import Logo from "./Logo"
+import { Link } from "gatsby"
 
 const Content = ({ data }) => {
 
@@ -70,6 +71,7 @@ const Content = ({ data }) => {
     background-color: transparent;
     perspective: 1000px;
     outline: none;
+    color: #000;
     .flip-inner {
       position: relative;
       width: 100%;
@@ -82,6 +84,16 @@ const Content = ({ data }) => {
       cursor: pointer;
       .flip-inner {
         transform: rotateY(180deg);
+      }
+    }
+    &.jobs-link {
+      margin-left: 24px;
+      font-size: 0.6rem;
+      .flip-back {
+        font-size: 2rem;
+        span {
+          margin-top: -4px;
+        }
       }
     }
     .flip-front, .flip-back {
@@ -124,6 +136,14 @@ const Content = ({ data }) => {
               <div className="flip-back">?</div>
             </div>
           </div>
+          <Link role="button" to="/careers" className="jobs-link" css={ menuItemStyles }>
+            <div className="flip-inner">
+              <div className="flip-front">
+                Careers
+              </div>
+              <div className="flip-back"><span>★</span></div>
+            </div>
+          </Link>
         </nav>
         <a href={data.headlineLink} css={ headingStyles } >{data.headline}</a>
       </div>
