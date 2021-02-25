@@ -8,8 +8,9 @@ const containerStyles = css`
   height: 100vh;
   background-color: #120030;
   color: #ffffff;
-  line-height: 200%;
+  line-height: 170%;
   font-size: 1.3em;
+  padding-top: 160px;
   overflow: scroll;
   .menu {
     padding-top: 130px;
@@ -26,6 +27,7 @@ const containerStyles = css`
     position: fixed;
     background-color: #120030;
     width: 100%;
+    top: 0;
   }
   .container {
     max-width: 1400px;
