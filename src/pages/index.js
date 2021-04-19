@@ -11,6 +11,8 @@ const IndexPage = ({data}) => {
   const contentData = {
     headline: _data.headline,
     headlineLink: _data.headlineLink,
+    headlineColor: _data.headlineColor,
+    headlineDropShadowColor: _data.headlineDropShadowColor,
     welcome: _data.welcome
   }
   const backdropData = {
@@ -43,6 +45,8 @@ export const query = graphql`
         node {
           headline
           headlineLink
+          headlineColor
+          headlineDropShadowColor
           foregroundImage {
             file {
               url

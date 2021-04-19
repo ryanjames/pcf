@@ -56,10 +56,10 @@ const Content = ({ data }) => {
     margin-bottom: 0;
     font-size: 2rem;
     text-decoration: none;
-    color: #120030;
+    color: ${data.headlineColor};
     transition: all 0.2s ease-in-out;
     &:hover {
-      text-shadow: -10px 10px #EA33EC;
+      text-shadow: -10px 10px ${data.headlineDropShadowColor};
     }
     @media (min-width: 640px) {
       font-size: 3rem;
