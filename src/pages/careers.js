@@ -132,7 +132,7 @@ const CareersPage = ({data}) => {
 
           <br />
           <br />
-          <h3><span>Careers:</span>Creativity Solves Everything</h3>
+          <h3><span>Careers:</span>Creativity Solves Everything.</h3>
           {careers
             .filter(career => career.node.category === "Creativity Solves Everything")
             .sort((a, b) => (a.node.position > b.node.position) ? 1 : -1)
