@@ -1,8 +1,7 @@
 import React from "react"
-
 import { Global, css } from '@emotion/react'
 import SEO from "../components/Seo"
-import { Link } from "gatsby"
+import { Link, graphql } from "gatsby"
 
 const containerStyles = css`
   color: #ffffff;
@@ -86,16 +85,26 @@ const containerStyles = css`
   .career {
     padding-bottom: 64px;
   }
+  .career a {
+    color: #ff00f3;
+  }
 `
 
 const Apply = ({ subject }) => <a className="button" href={`mailto:careers@papercranefactory.com?subject=${subject}`}>Apply</a>
 
 const CareersPage = ({data}) => {
   const careers = data.allContentfulCareers.edges
+  const descriptions = data.allContentfulCareersDescriptionTextNode.edges
+  careers.forEach(career => {
+    const description = descriptions.find(description => description.node.parent.id == career.node.id);
+    career.node.description = description.node.childrenMarkdownRemark[0].html
+  });
+
   console.log(careers)
+
   return (
     <>
-    <SEO title="Paper Crane Factory" />
+      <SEO title="Paper Crane Factory" />
       <div css={ containerStyles } >
         <Global
           styles={css`
@@ -124,7 +133,7 @@ const CareersPage = ({data}) => {
             .map(career => (
               <div key={career.node.id} className="career">
                 <h4>{career.node.position}</h4>
-                <p>{career.node.description.description}</p>
+                <div dangerouslySetInnerHTML={{ __html: career.node.description, }} />
                 <Apply subject={`Career Inquiry: ${career.node.position}`} />
               </div>
             ))
@@ -139,7 +148,7 @@ const CareersPage = ({data}) => {
             .map(career => (
               <div key={career.node.id} className="career">
                 <h4>{career.node.position}</h4>
-                <p>{career.node.description.description}</p>
+                <div dangerouslySetInnerHTML={{ __html: career.node.description, }} />
                 <Apply subject={`Career Inquiry: ${career.node.position}`} />
               </div>
             ))
@@ -157,10 +166,19 @@ export const query = graphql`
         node {
           id
           position
-          description {
-            description
-          }
           category
+        }
+      }
+    }
+    allContentfulCareersDescriptionTextNode {
+      edges {
+        node {
+          childrenMarkdownRemark {
+            html
+          }
+          parent {
+            id
+          }
         }
       }
     }

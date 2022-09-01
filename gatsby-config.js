@@ -40,8 +40,17 @@ module.exports = {
         },
       },
     },
+    `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          `gatsby-remark-hard-breaks`
+        ]
+      },
+    },
     {
       resolve: `gatsby-plugin-google-gtag`,
       options: {
