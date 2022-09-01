@@ -100,8 +100,6 @@ const CareersPage = ({data}) => {
     career.node.description = description.node.childrenMarkdownRemark[0].html
   });
 
-  console.log(careers)
-
   return (
     <>
       <SEO title="Paper Crane Factory" />
