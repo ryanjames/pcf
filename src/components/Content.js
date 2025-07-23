@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
-import { css } from '@emotion/react'
+import React, { useState } from "react"
+import { css } from "@emotion/react"
 
 import Welcome from "./Welcome"
 import Logo from "./Logo"
 import { Link } from "gatsby"
 
 const Content = ({ data }) => {
-
-  const [welcomeState, setWelcomeState] = useState(false);
+  const [welcomeState, setWelcomeState] = useState(false)
 
   const containerStyles = css`
     position: absolute;
@@ -24,7 +23,7 @@ const Content = ({ data }) => {
         flex-direction: row;
       }
     }
-    
+
     @media (min-width: 460px) {
       top: 60px;
       bottom: 60px;
@@ -43,7 +42,7 @@ const Content = ({ data }) => {
       left: 120px;
       right: 120px;
     }
-  `;
+  `
 
   const headingStyles = css`
     display: block;
@@ -73,7 +72,7 @@ const Content = ({ data }) => {
 
   const menuItemStyles = css`
     width: 56px;
-    height: 56px;;
+    height: 56px;
     font-size: 1.2rem;
     text-transform: uppercase;
     background-color: transparent;
@@ -108,7 +107,8 @@ const Content = ({ data }) => {
         }
       }
     }
-    .flip-front, .flip-back {
+    .flip-front,
+    .flip-back {
       display: flex;
       position: absolute;
       justify-content: center;
@@ -132,15 +132,25 @@ const Content = ({ data }) => {
     }
   `
   const handleWelcomeClick = () => {
-    setWelcomeState(!welcomeState);
+    setWelcomeState(!welcomeState)
   }
 
   return (
     <>
-      <Welcome data={data.welcome} open={welcomeState} handleWelcomeClick={handleWelcomeClick} />
-      <div css={ containerStyles } >
+      <Welcome
+        data={data.welcome}
+        open={welcomeState}
+        handleWelcomeClick={handleWelcomeClick}
+      />
+      <div css={containerStyles}>
         <nav className="navigation">
-          <div role="button" onClick={handleWelcomeClick} onKeyDown={handleWelcomeClick} tabIndex="0" css={ menuItemStyles }>
+          <div
+            role="button"
+            onClick={handleWelcomeClick}
+            onKeyDown={handleWelcomeClick}
+            tabIndex="0"
+            css={menuItemStyles}
+          >
             <div className="flip-inner">
               <div className="flip-front">
                 <Logo />
@@ -148,16 +158,23 @@ const Content = ({ data }) => {
               <div className="flip-back">?</div>
             </div>
           </div>
-          <Link role="button" to="/careers" className="jobs-link" css={ menuItemStyles }>
+          <Link
+            role="button"
+            to="https://papercranefactory.medium.com/"
+            className="jobs-link"
+            css={menuItemStyles}
+          >
             <div className="flip-inner">
-              <div className="flip-front">
-                Careers
+              <div className="flip-front">Work</div>
+              <div className="flip-back">
+                <span>★</span>
               </div>
-              <div className="flip-back"><span>★</span></div>
             </div>
           </Link>
         </nav>
-        <a href={data.headlineLink} css={ headingStyles } >{data.headline}</a>
+        <a href={data.headlineLink} css={headingStyles}>
+          {data.headline}
+        </a>
       </div>
     </>
   )
