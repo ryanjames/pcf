@@ -160,7 +160,7 @@ const Content = ({ data }) => {
           </div>
           <Link
             role="button"
-            to="https://papercranefactory.medium.com/"
+            to="https://medium.com/paper-crane-factory"
             className="jobs-link"
             css={menuItemStyles}
           >
